@@ -1,0 +1,6 @@
+{
+  "name": "PoopType",
+  "description": "Peer-reviewed bathroom pseudoscience. Client-side stool personality typing in the browser — your poop never leaves your device.",
+  "requestFramePermissions": ["camera"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
