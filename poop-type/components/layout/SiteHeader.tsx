@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { LayoutGroup, motion } from "framer-motion";
-import { PoopMascot } from "@/components/mascot/PoopMascot";
 import { Button } from "@/components/ui/Button";
 import { LanguageSwitcher, useLanguage } from "@/components/LanguageProvider";
 import {
@@ -13,7 +12,12 @@ import {
 
 export function SiteHeader() {
   const pathname = usePathname();
-  const { t } = useLanguage();
+  const { lang, t } = useLanguage();
+
+  const logoSrc =
+    lang === "fa"
+      ? "/assets/aistudio/Kawaii_Poop_Type_Persian_Sticker_Logo_99946bd4.png"
+      : "/assets/aistudio/Kawaii_PoopType_Sticker_Logo_e3f3f15e.png";
 
   const navLinks = [
     { href: "/", label: t.nav.analyze },
@@ -27,24 +31,32 @@ export function SiteHeader() {
       style={{ paddingTop: "env(safe-area-inset-top)" }}
     >
       <div className="mx-auto flex h-16 md:h-20 max-w-6xl items-center justify-between gap-2 lg:gap-4 px-3.5 sm:px-5 lg:px-8">
-        {/* Brand lockup with mini mascot */}
+        {/* Top bar brand logo (localized EN / FA sticker logo) */}
         <Link
           href="/"
-          className="inline-flex items-center gap-2 rounded-full py-1 whitespace-nowrap shrink-0 group"
+          aria-label={t.brandName}
+          data-testid="site-header-logo"
+          className="inline-flex items-center shrink-0 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#FF7AC6]/60 rounded-2xl"
         >
           <motion.span
-            whileHover={{ rotate: [-4, 6, 0], scale: 1.08 }}
+            whileHover={{ rotate: [-3, 3, 0], scale: 1.05 }}
+            whileTap={{ scale: 0.96 }}
             transition={{
-              rotate: { type: "tween", duration: 0.38, ease: "easeInOut" },
+              rotate: { type: "tween", duration: 0.36, ease: "easeInOut" },
               scale: SPRING_SNAPPY,
             }}
-            className="inline-flex"
+            className="inline-flex items-center"
           >
-            <PoopMascot size={36} mood="idle" animated={false} />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={logoSrc}
+              alt={t.brandName}
+              width={lang === "fa" ? 1536 : 1535}
+              height={1024}
+              draggable={false}
+              className="h-14 sm:h-16 md:h-[72px] w-auto object-contain select-none drop-shadow-[0_2px_0_rgba(27,27,31,0.14)]"
+            />
           </motion.span>
-          <span className="font-display text-2xl lg:text-3xl tracking-wide text-[#1B1B1F] group-hover:text-[#8B5A2B] transition-colors">
-            {t.brandName}
-          </span>
         </Link>
 
         {/* Mobile compact controls: privacy badge (hidden on ultra-narrow) + language switcher */}

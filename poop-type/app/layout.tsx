@@ -35,6 +35,16 @@ export const metadata: Metadata = {
   title: "PoopType — Silly Poop Personality Game!",
   description:
     "Pick a photo on your phone to get a funny 4-letter poop personality card! 100% private — your photo never leaves your device.",
+  icons: {
+    icon: [
+      {
+        url: "/assets/aistudio/Cute_Winking_Poop_App_Icon_e89880a1.png",
+        type: "image/png",
+      },
+    ],
+    shortcut: "/assets/aistudio/Cute_Winking_Poop_App_Icon_e89880a1.png",
+    apple: "/assets/aistudio/Cute_Winking_Poop_App_Icon_e89880a1.png",
+  },
   openGraph: {
     title: "PoopType — Silly Poop Personality Game!",
     description:

@@ -4,12 +4,13 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "sh -c 'exec ./poop-type/node_modules/.bin/next dev ./poop-type -p 3000 -H 0.0.0.0' --",
-    "build": "npm --prefix poop-type run build",
-    "start": "sh -c 'exec ./poop-type/node_modules/.bin/next start ./poop-type -p 3000 -H 0.0.0.0' --",
-    "preview": "sh -c 'exec ./poop-type/node_modules/.bin/next start ./poop-type -p 3000 -H 0.0.0.0' --",
+    "postinstall": "npm --prefix poop-type install --no-audit --no-fund",
+    "dev": "sh -c 'test -x ./poop-type/node_modules/.bin/next || npm --prefix poop-type install --no-audit --no-fund; exec ./poop-type/node_modules/.bin/next dev ./poop-type -p 3000 -H 0.0.0.0' --",
+    "build": "sh -c 'test -x ./poop-type/node_modules/.bin/next || npm --prefix poop-type install --no-audit --no-fund; exec npm --prefix poop-type run build' --",
+    "start": "sh -c 'test -x ./poop-type/node_modules/.bin/next || npm --prefix poop-type install --no-audit --no-fund; exec ./poop-type/node_modules/.bin/next start ./poop-type -p 3000 -H 0.0.0.0' --",
+    "preview": "sh -c 'test -x ./poop-type/node_modules/.bin/next || npm --prefix poop-type install --no-audit --no-fund; exec ./poop-type/node_modules/.bin/next start ./poop-type -p 3000 -H 0.0.0.0' --",
     "clean": "rm -rf poop-type/.next dist server.js",
-    "lint": "npm --prefix poop-type run lint"
+    "lint": "sh -c 'test -x ./poop-type/node_modules/.bin/eslint || npm --prefix poop-type install --no-audit --no-fund; exec npm --prefix poop-type run lint' --"
   },
   "dependencies": {
     "@google/genai": "^2.4.0",
