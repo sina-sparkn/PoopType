@@ -62,7 +62,7 @@ Drumroll → 4 ascending pentatonic tile flips → confetti blast → your offic
 
 ---
 
-### 🌐 Full Persian (RTL) Mode + 5-Year-Old-Friendly FAQ
+### 🌐 Full Persian (RTL) Mode
 One tap flips the entire experience into native Persian (`فارسی`) with Vazirmatn typography, a custom Persian sticker logo (`پوپ‌تایپ`), mirrored floating controls, and a jargon-free FAQ explaining how the pixel "I Spy" algorithm works.
 
 <p align="center">
@@ -71,7 +71,7 @@ One tap flips the entire experience into native Persian (`فارسی`) with Vazi
 
 ---
 
-## 🔬 How Our "Algorithm" Actually Works (Explain Like I'm 5)
+## 🔬 How Our "Algorithm" Actually Works
 
 No cloud AI. No sneaky servers. Just honest, deterministic **HTML Canvas pixel math + SHA-256** right on your screen:
 
