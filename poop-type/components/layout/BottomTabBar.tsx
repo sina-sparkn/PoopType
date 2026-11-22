@@ -10,6 +10,7 @@ import {
 } from "@/lib/smooth-scroll";
 import { SPRING_SNAPPY } from "@/components/motion/MotionPrimitives";
 import { useLanguage } from "@/components/LanguageProvider";
+import { playKawaiiSfx } from "@/lib/kawaii-sfx";
 
 export const OPEN_UPLOAD_EVENT = "pooptype:open-upload";
 export const FOCUS_ANALYZER_EVENT = "pooptype:focus-analyzer";
@@ -104,6 +105,7 @@ export function BottomTabBar({
   const isOnHome = pathname === "/";
 
   const handleCameraTap = () => {
+    playKawaiiSfx("pop");
     if (onCameraClick) {
       onCameraClick();
       return;
@@ -130,6 +132,7 @@ export function BottomTabBar({
     e: React.MouseEvent<HTMLAnchorElement>,
     tab: BottomTabItem
   ) => {
+    playKawaiiSfx("pop");
     onTabSelect?.(tab);
     // Re-tapping the already-active exact route smoothly scrolls back to top
     if (pathname === tab.href) {

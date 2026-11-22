@@ -39,6 +39,7 @@ import {
 } from "@/components/layout/BottomTabBar";
 import { useLanguage } from "@/components/LanguageProvider";
 import { formatTemplate } from "@/lib/i18n";
+import { playKawaiiSfx } from "@/lib/kawaii-sfx";
 
 interface QueuedSpecimen {
   id: string;
@@ -342,6 +343,7 @@ function UploadAnalyzerContent() {
         const next = [...current, ...accepted];
         specimensRef.current = next;
         setSpecimens(next);
+        playKawaiiSfx("photoAdd");
         triggerWiggle();
       }
     },
@@ -397,6 +399,7 @@ function UploadAnalyzerContent() {
       const next = current.filter((s) => s.id !== id);
       specimensRef.current = next;
       setSpecimens(next);
+      playKawaiiSfx("photoRemove");
     },
     [isAnalyzing, phase, resetAnalysis]
   );
@@ -412,6 +415,7 @@ function UploadAnalyzerContent() {
     }
     specimensRef.current = [];
     setSpecimens([]);
+    playKawaiiSfx("photoRemove");
   }, [isAnalyzing, phase, resetAnalysis]);
 
   const handleDragEnter = useCallback((e: React.DragEvent<HTMLDivElement>) => {
@@ -570,6 +574,7 @@ function UploadAnalyzerContent() {
               type="button"
               disabled={isAnalyzing}
               onClick={() => {
+                playKawaiiSfx("pop");
                 setValidationError(null);
                 setIsCameraOpen(true);
               }}
@@ -716,6 +721,7 @@ function UploadAnalyzerContent() {
           <Button
             color="sunshine"
             size="lg"
+            sfx="sparkle"
             onClick={handleAnalyze}
             disabled={buttonState.disabled}
             aria-busy={buttonState.isLoading}

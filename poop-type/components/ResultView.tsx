@@ -23,6 +23,7 @@ import {
 } from "@/components/motion/MotionPrimitives";
 import { useLanguage } from "@/components/LanguageProvider";
 import { formatTemplate, type TranslationDictionary } from "@/lib/i18n";
+import { playKawaiiSfx } from "@/lib/kawaii-sfx";
 
 interface ResultViewProps {
   result: PortfolioAnalysisResult;
@@ -121,15 +122,32 @@ export function ResultView({ result }: ResultViewProps) {
       window.setTimeout(() => {
         setRevealStage("tiles");
         setFlippedCount(1);
+        playKawaiiSfx("tileFlip", { stepIndex: 0 });
       }, 780)
     );
-    timers.push(window.setTimeout(() => setFlippedCount(2), 1060));
-    timers.push(window.setTimeout(() => setFlippedCount(3), 1340));
-    timers.push(window.setTimeout(() => setFlippedCount(4), 1620));
+    timers.push(
+      window.setTimeout(() => {
+        setFlippedCount(2);
+        playKawaiiSfx("tileFlip", { stepIndex: 1 });
+      }, 1060)
+    );
+    timers.push(
+      window.setTimeout(() => {
+        setFlippedCount(3);
+        playKawaiiSfx("tileFlip", { stepIndex: 2 });
+      }, 1340)
+    );
+    timers.push(
+      window.setTimeout(() => {
+        setFlippedCount(4);
+        playKawaiiSfx("tileFlip", { stepIndex: 3 });
+      }, 1620)
+    );
     timers.push(
       window.setTimeout(() => {
         setRevealStage("revealed");
         setConfettiActive(true);
+        playKawaiiSfx("fanfare");
         if (
           typeof navigator !== "undefined" &&
           typeof navigator.vibrate === "function"
@@ -699,7 +717,10 @@ export function ResultView({ result }: ResultViewProps) {
                           type="checkbox"
                           checked={includePhotos}
                           disabled={sessionPreviews.length === 0}
-                          onChange={(e) => setIncludePhotos(e.target.checked)}
+                          onChange={(e) => {
+                            playKawaiiSfx("pop");
+                            setIncludePhotos(e.target.checked);
+                          }}
                           className="mt-1 h-5 w-5 rounded border-[2.5px] border-[#1B1B1F] accent-[#1B1B1F] disabled:cursor-not-allowed"
                         />
                         <span className="text-base text-[#1B1B1F]">
@@ -722,6 +743,7 @@ export function ResultView({ result }: ResultViewProps) {
                       <Button
                         color="sunshine"
                         size="md"
+                        sfx="sparkle"
                         fullWidth
                         onClick={handleWebShare}
                       >
@@ -730,6 +752,7 @@ export function ResultView({ result }: ResultViewProps) {
                       <Button
                         color="cream"
                         size="md"
+                        sfx="sparkle"
                         fullWidth
                         onClick={handleCopyLink}
                       >
@@ -738,6 +761,7 @@ export function ResultView({ result }: ResultViewProps) {
                       <Button
                         color="mint"
                         size="md"
+                        sfx="sparkle"
                         fullWidth
                         onClick={handleDownloadCard}
                         disabled={!cardDataUrl}

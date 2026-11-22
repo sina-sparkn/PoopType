@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { CANDY_SURFACE_CLASSES, CandyColor } from "@/lib/theme";
 import { FOCUS_ANALYZER_EVENT } from "@/components/layout/BottomTabBar";
 import { smoothScrollToElement } from "@/lib/smooth-scroll";
+import { playKawaiiSfx, type KawaiiSfxName } from "@/lib/kawaii-sfx";
 
 type ButtonSize = "md" | "lg";
 
@@ -12,6 +13,7 @@ interface BaseProps {
   color?: CandyColor;
   size?: ButtonSize;
   fullWidth?: boolean;
+  sfx?: KawaiiSfxName | false;
   className?: string;
   "data-testid"?: string;
   children: React.ReactNode;
@@ -37,6 +39,7 @@ export function Button(props: ButtonProps) {
     color = "sunshine",
     size = "md",
     fullWidth = false,
+    sfx = "pop",
     className = "",
     children,
   } = props;
@@ -63,6 +66,9 @@ export function Button(props: ButtonProps) {
     const { href, onClick } = props;
 
     const handleLinkClick: React.MouseEventHandler<HTMLAnchorElement> = (e) => {
+      if (sfx !== false) {
+        playKawaiiSfx(sfx);
+      }
       onClick?.(e);
       if (e.defaultPrevented) return;
 
@@ -103,19 +109,36 @@ export function Button(props: ButtonProps) {
     color: _c,
     size: _s,
     fullWidth: _fw,
+    sfx: _sfx,
     className: _cn,
     children: _ch,
     type = "button",
+    onClick,
+    disabled,
     ...rest
   } = props as ActionButtonProps;
   void _c;
   void _s;
   void _fw;
+  void _sfx;
   void _cn;
   void _ch;
 
+  const handleActionClick: React.MouseEventHandler<HTMLButtonElement> = (e) => {
+    if (!disabled && sfx !== false) {
+      playKawaiiSfx(sfx);
+    }
+    onClick?.(e);
+  };
+
   return (
-    <button type={type} className={classes} {...rest}>
+    <button
+      type={type}
+      disabled={disabled}
+      onClick={handleActionClick}
+      className={classes}
+      {...rest}
+    >
       {children}
     </button>
   );

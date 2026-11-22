@@ -14,6 +14,7 @@ import {
 } from "@/components/motion/MotionPrimitives";
 import { useLanguage } from "@/components/LanguageProvider";
 import { formatTemplate } from "@/lib/i18n";
+import { playKawaiiSfx } from "@/lib/kawaii-sfx";
 
 export interface ScienceStudyItem {
   id: string;
@@ -38,13 +39,17 @@ export function ScienceStudiesAccordion({
   const allOpen = studies.every((study) => Boolean(openIds[study.id]));
 
   const toggleOne = (id: string) => {
+    const nextOpen = !openIds[id];
+    playKawaiiSfx(nextOpen ? "accordionOpen" : "accordionClose");
     setOpenIds((prev) => ({ ...prev, [id]: !prev[id] }));
   };
 
   const toggleAll = () => {
     if (allOpen) {
+      playKawaiiSfx("accordionClose");
       setOpenIds({});
     } else {
+      playKawaiiSfx("accordionOpen");
       const next: Record<string, boolean> = {};
       for (const s of studies) {
         next[s.id] = true;

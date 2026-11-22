@@ -22,10 +22,31 @@ export function FloatingDoodles() {
   const driftRotateRight = useTransform(smoothY, [0, 1800], [0, 22]);
 
   return (
-    <div
-      aria-hidden="true"
-      className="pointer-events-none fixed inset-0 z-0 overflow-hidden motion-reduce:hidden"
-    >
+    <>
+      {/* Three staggered pastel polka-dot layers (wiggle up/down slowly while music plays; static under reduced motion) */}
+      <div
+        aria-hidden="true"
+        data-testid="music-dots-backdrop"
+        className="pointer-events-none fixed inset-0 z-0 overflow-hidden"
+      >
+        <div
+          data-testid="dot-layer-pink"
+          className="absolute -inset-6 bg-dot-layer-pink"
+        />
+        <div
+          data-testid="dot-layer-sky"
+          className="absolute -inset-6 bg-dot-layer-sky"
+        />
+        <div
+          data-testid="dot-layer-sunshine"
+          className="absolute -inset-6 bg-dot-layer-sunshine"
+        />
+      </div>
+
+      <div
+        aria-hidden="true"
+        className="pointer-events-none fixed inset-0 z-0 overflow-hidden motion-reduce:hidden"
+      >
       {/* Top-left golden star (visible on all screens, subtle opacity) */}
       <motion.div
         style={{ y: driftUpSlow, rotate: driftRotateRight }}
@@ -190,6 +211,7 @@ export function FloatingDoodles() {
           />
         </svg>
       </motion.div>
-    </div>
+      </div>
+    </>
   );
 }

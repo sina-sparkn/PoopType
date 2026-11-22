@@ -85,15 +85,148 @@ html[dir="rtl"] .font-display {
   letter-spacing: 0 !important;
 }
 
-/* Subtle cream polka-dot + confetti sticker-book background */
+/* Subtle cream sticker-book canvas (animated pastel mini-dots live in FloatingDoodles backdrop layers) */
 .bg-sticker-canvas {
   background-color: #fff6e5;
-  background-image:
-    radial-gradient(circle at 12px 12px, rgba(255, 122, 198, 0.22) 2.5px, transparent 2.6px),
-    radial-gradient(circle at 38px 34px, rgba(92, 200, 255, 0.22) 2.5px, transparent 2.6px),
-    radial-gradient(circle at 60px 14px, rgba(255, 217, 61, 0.34) 2.5px, transparent 2.6px);
-  background-size: 72px 54px;
 }
+
+/* Three staggered pastel mini-dot layers that slowly wiggle up and down while music is playing */
+@keyframes dots-wiggle-pink {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  25% {
+    transform: translate3d(1.5px, -7px, 0);
+  }
+  50% {
+    transform: translate3d(0, 2px, 0);
+  }
+  75% {
+    transform: translate3d(-1.5px, 7px, 0);
+  }
+}
+
+@keyframes dots-wiggle-sky {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  25% {
+    transform: translate3d(-1.5px, 7px, 0);
+  }
+  50% {
+    transform: translate3d(0, -2px, 0);
+  }
+  75% {
+    transform: translate3d(1.5px, -7px, 0);
+  }
+}
+
+@keyframes dots-wiggle-sunshine {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  30% {
+    transform: translate3d(1px, -6px, 0);
+  }
+  65% {
+    transform: translate3d(-1px, 6px, 0);
+  }
+}
+
+.bg-dot-layer-pink,
+.bg-dot-layer-sky,
+.bg-dot-layer-sunshine {
+  background-size: 72px 54px;
+  will-change: transform;
+  animation-play-state: paused;
+}
+
+.bg-dot-layer-pink {
+  background-image: radial-gradient(
+    circle at 12px 12px,
+    rgba(255, 122, 198, 0.22) 2.5px,
+    transparent 2.6px
+  );
+  animation: dots-wiggle-pink 4.4s ease-in-out infinite;
+  animation-play-state: paused;
+}
+
+.bg-dot-layer-sky {
+  background-image: radial-gradient(
+    circle at 38px 34px,
+    rgba(92, 200, 255, 0.22) 2.5px,
+    transparent 2.6px
+  );
+  animation: dots-wiggle-sky 5.2s ease-in-out infinite;
+  animation-play-state: paused;
+}
+
+.bg-dot-layer-sunshine {
+  background-image: radial-gradient(
+    circle at 60px 14px,
+    rgba(255, 217, 61, 0.34) 2.5px,
+    transparent 2.6px
+  );
+  animation: dots-wiggle-sunshine 3.9s ease-in-out infinite;
+  animation-play-state: paused;
+}
+
+html[data-music-playing="true"] .bg-dot-layer-pink,
+html[data-music-playing="true"] .bg-dot-layer-sky,
+html[data-music-playing="true"] .bg-dot-layer-sunshine {
+  animation-play-state: running;
+}
+
+/* Redesigned 5-bar center-symmetrical candy soundwave visualizer (GPU compositor-only) */
+@keyframes eq-wave-1 {
+  0%, 100% { transform: scaleY(0.32); }
+  25% { transform: scaleY(0.76); }
+  55% { transform: scaleY(0.42); }
+  80% { transform: scaleY(0.88); }
+}
+
+@keyframes eq-wave-2 {
+  0%, 100% { transform: scaleY(0.84); }
+  28% { transform: scaleY(0.36); }
+  58% { transform: scaleY(0.96); }
+  82% { transform: scaleY(0.48); }
+}
+
+@keyframes eq-wave-3 {
+  0%, 100% { transform: scaleY(0.46); }
+  22% { transform: scaleY(1); }
+  50% { transform: scaleY(0.38); }
+  76% { transform: scaleY(0.92); }
+}
+
+@keyframes eq-wave-4 {
+  0%, 100% { transform: scaleY(0.78); }
+  32% { transform: scaleY(0.34); }
+  62% { transform: scaleY(0.94); }
+  86% { transform: scaleY(0.44); }
+}
+
+@keyframes eq-wave-5 {
+  0%, 100% { transform: scaleY(0.34); }
+  30% { transform: scaleY(0.82); }
+  60% { transform: scaleY(0.4); }
+  84% { transform: scaleY(0.72); }
+}
+
+.eq-wave-bar {
+  transform-origin: center;
+  will-change: transform;
+  transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1), opacity 220ms ease;
+}
+
+.eq-wave-bar-1 { animation: eq-wave-1 0.94s ease-in-out infinite; }
+.eq-wave-bar-2 { animation: eq-wave-2 0.72s ease-in-out infinite; }
+.eq-wave-bar-3 { animation: eq-wave-3 0.84s ease-in-out infinite; }
+.eq-wave-bar-4 { animation: eq-wave-4 0.68s ease-in-out infinite; }
+.eq-wave-bar-5 { animation: eq-wave-5 1.02s ease-in-out infinite; }
 
 /* Chunky comic outline & hard offset shadows */
 .sticker-card {
@@ -246,7 +379,11 @@ html[dir="rtl"] .font-display {
   .animate-flush-spin,
   .animate-mascot-bob,
   .animate-mascot-blink,
-  .animate-magnifier {
+  .animate-magnifier,
+  .bg-dot-layer-pink,
+  .bg-dot-layer-sky,
+  .bg-dot-layer-sunshine,
+  .eq-wave-bar {
     animation: none !important;
   }
   *,

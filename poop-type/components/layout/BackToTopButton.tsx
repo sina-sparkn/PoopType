@@ -13,6 +13,7 @@ import {
   recordDownwardGesture,
 } from "@/lib/back-to-top";
 import { SPRING_SNAPPY } from "@/components/motion/MotionPrimitives";
+import { playKawaiiSfx } from "@/lib/kawaii-sfx";
 
 function getScrollMetrics() {
   const scrollY = window.scrollY || window.pageYOffset || 0;
@@ -141,7 +142,10 @@ export function BackToTopButton() {
         <motion.button
           key="back-to-top"
           type="button"
-          onClick={() => smoothScrollToTop()}
+          onClick={() => {
+            playKawaiiSfx("whooshUp");
+            smoothScrollToTop();
+          }}
           aria-label={t.nav.backToTopAria}
           title={t.nav.backToTopAria}
           data-testid="back-to-top-button"

@@ -14,8 +14,17 @@ import {
   resolveInitialMusicPreference,
   shouldUnlockOnGesture,
 } from "@/lib/background-music";
+import { playKawaiiSfx } from "@/lib/kawaii-sfx";
 
 const AUDIO_SRC = "/assets/aistudio/main_music_a4aae9ca.m4a";
+
+const VISUALIZER_BARS = [
+  { color: "#FF7AC6", animClass: "eq-wave-bar-1", staticScale: 0.48 },
+  { color: "#FFD93D", animClass: "eq-wave-bar-2", staticScale: 0.82 },
+  { color: "#6BE3B5", animClass: "eq-wave-bar-3", staticScale: 1.0 },
+  { color: "#5CC8FF", animClass: "eq-wave-bar-4", staticScale: 0.76 },
+  { color: "#FF9F43", animClass: "eq-wave-bar-5", staticScale: 0.44 },
+] as const;
 
 function readStoredPreference(): MusicPreference {
   try {
@@ -51,6 +60,14 @@ export function BackgroundMusicPlayer() {
   const cleanupUnlockRef = useRef<(() => void) | null>(null);
 
   const [status, setStatus] = useState<MusicPlaybackStatus>("paused");
+
+  useEffect(() => {
+    document.documentElement.dataset.musicPlaying =
+      status === "playing" ? "true" : "false";
+    return () => {
+      document.documentElement.dataset.musicPlaying = "false";
+    };
+  }, [status]);
 
   const updateStatus = useCallback((next: MusicPlaybackStatus) => {
     statusRef.current = next;
@@ -154,6 +171,7 @@ export function BackgroundMusicPlayer() {
     const audio = audioRef.current;
     if (!audio) return;
 
+    playKawaiiSfx("pop");
     clearUnlockListeners();
     const action = getToggleAction(statusRef.current);
 
@@ -221,79 +239,60 @@ export function BackgroundMusicPlayer() {
         whileHover={prefersReducedMotion ? undefined : { y: -3, scale: 1.05 }}
         whileTap={prefersReducedMotion ? undefined : { scale: 0.92 }}
         transition={SPRING_SNAPPY}
-        className={`fixed z-30 start-4 bottom-[calc(5.75rem+env(safe-area-inset-bottom,0px))] md:bottom-7 md:start-7 inline-flex h-[52px] min-w-[52px] sm:h-12 sm:px-4 items-center justify-center gap-2 rounded-full border-[3px] border-[#1B1B1F] text-[#1B1B1F] shadow-[4px_4px_0_#1B1B1F] sticker-press cursor-pointer touch-manipulation select-none transition-colors focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#FF7AC6]/70 ${
+        className={`fixed z-30 start-4 bottom-[calc(5.75rem+env(safe-area-inset-bottom,0px))] md:bottom-7 md:start-7 inline-flex h-[52px] min-w-[52px] sm:h-12 sm:ps-4 sm:pe-2 items-center justify-center gap-2.5 rounded-full border-[3px] border-[#1B1B1F] text-[#1B1B1F] shadow-[4px_4px_0_#1B1B1F] sticker-press cursor-pointer touch-manipulation select-none transition-colors focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#FF7AC6]/70 ${
           isPlaying ? "bg-[#6BE3B5]" : "bg-[#FFF6E5]"
         }`}
       >
         {isPlaying ? (
           <Pause
-            className="h-5 w-5 shrink-0 fill-[#1B1B1F]"
+            className="h-[18px] w-[18px] shrink-0 fill-[#1B1B1F]"
             strokeWidth={2.5}
             aria-hidden="true"
           />
         ) : (
           <Play
-            className="h-5 w-5 shrink-0 fill-[#1B1B1F] translate-x-[1px]"
+            className="h-[18px] w-[18px] shrink-0 fill-[#1B1B1F] translate-x-[1px]"
             strokeWidth={2.5}
             aria-hidden="true"
           />
         )}
 
-        <span className="hidden sm:inline font-display text-base tracking-wide">
+        <span className="hidden sm:inline font-display text-base tracking-wide whitespace-nowrap">
           {label}
         </span>
 
-        {/* Live animated equalizer bars bouncing up and down while playing */}
-        {isPlaying && (
-          <span
-            aria-hidden="true"
-            data-testid="music-equalizer"
-            className="hidden sm:inline-flex items-end gap-[2.5px] h-4"
-          >
-            <motion.span
-              className="w-[3px] h-4 rounded-full bg-[#1B1B1F] origin-bottom"
-              animate={
-                prefersReducedMotion
-                  ? { scaleY: 0.55 }
-                  : { scaleY: [0.28, 1, 0.42, 0.85, 0.28] }
-              }
-              transition={{
-                type: "tween",
-                duration: 0.78,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-            />
-            <motion.span
-              className="w-[3px] h-4 rounded-full bg-[#1B1B1F] origin-bottom"
-              animate={
-                prefersReducedMotion
-                  ? { scaleY: 1 }
-                  : { scaleY: [0.95, 0.32, 1, 0.48, 0.95] }
-              }
-              transition={{
-                type: "tween",
-                duration: 0.62,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-            />
-            <motion.span
-              className="w-[3px] h-4 rounded-full bg-[#1B1B1F] origin-bottom"
-              animate={
-                prefersReducedMotion
-                  ? { scaleY: 0.72 }
-                  : { scaleY: [0.42, 0.88, 0.28, 1, 0.42] }
-              }
-              transition={{
-                type: "tween",
-                duration: 0.88,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-            />
-          </span>
-        )}
+        {/* Redesigned concentric dark-ink soundwave capsule with 5 candy-colored waveform bars */}
+        <span
+          aria-hidden="true"
+          dir="ltr"
+          data-testid="music-equalizer"
+          data-playing={isPlaying ? "true" : "false"}
+          className="relative hidden sm:inline-flex items-center justify-center h-8 px-3 gap-[4px] rounded-full bg-[#1B1B1F] shadow-[inset_0_1.5px_0_rgba(255,255,255,0.16)] overflow-hidden shrink-0"
+        >
+          {/* Subtle oscilloscope center line */}
+          <span className="pointer-events-none absolute inset-x-2.5 top-1/2 -translate-y-1/2 h-[1.5px] rounded-full bg-white/15" />
+
+          {VISUALIZER_BARS.map((bar, index) => {
+            const shouldAnimate = isPlaying && !prefersReducedMotion;
+            return (
+              <span
+                key={bar.animClass}
+                data-testid={`eq-bar-${index}`}
+                className={`relative z-10 w-[3.5px] h-[18px] rounded-full eq-wave-bar ${
+                  shouldAnimate ? bar.animClass : ""
+                }`}
+                style={{
+                  backgroundColor: bar.color,
+                  boxShadow: isPlaying ? `0 0 6px ${bar.color}55` : "none",
+                  opacity: isPlaying ? 1 : 0.65,
+                  transform: shouldAnimate
+                    ? undefined
+                    : `scaleY(${isPlaying ? bar.staticScale : 0.2})`,
+                }}
+              />
+            );
+          })}
+        </span>
       </motion.button>
     </>
   );

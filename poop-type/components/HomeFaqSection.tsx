@@ -24,6 +24,7 @@ import {
   SMOOTH_EASE,
   SPRING_SNAPPY,
 } from "@/components/motion/MotionPrimitives";
+import { playKawaiiSfx } from "@/lib/kawaii-sfx";
 
 const FAQ_ICON_MAP: Record<string, LucideIcon> = {
   "how-it-works": Search,
@@ -47,13 +48,17 @@ export function HomeFaqSection() {
   const allOpen = faq.items.every((item) => Boolean(openIds[item.id]));
 
   const toggleOne = (id: string) => {
+    const nextOpen = !openIds[id];
+    playKawaiiSfx(nextOpen ? "accordionOpen" : "accordionClose");
     setOpenIds((prev) => ({ ...prev, [id]: !prev[id] }));
   };
 
   const toggleAll = () => {
     if (allOpen) {
+      playKawaiiSfx("accordionClose");
       setOpenIds({});
     } else {
+      playKawaiiSfx("accordionOpen");
       const next: Record<string, boolean> = {};
       for (const item of faq.items) {
         next[item.id] = true;

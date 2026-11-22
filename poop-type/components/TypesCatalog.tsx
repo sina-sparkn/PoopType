@@ -17,6 +17,7 @@ import {
 } from "@/components/motion/MotionPrimitives";
 import { useLanguage } from "@/components/LanguageProvider";
 import { formatTemplate } from "@/lib/i18n";
+import { playKawaiiSfx } from "@/lib/kawaii-sfx";
 
 export function TypesCatalog() {
   const { t } = useLanguage();
@@ -47,6 +48,7 @@ export function TypesCatalog() {
     sheenFilter !== "ALL";
 
   const resetFilters = () => {
+    playKawaiiSfx("pop");
     setFormFilter("ALL");
     setOutlineFilter("ALL");
     setToneFilter("ALL");
@@ -55,6 +57,7 @@ export function TypesCatalog() {
 
   const openCardModal = useCallback(
     (code: PoopTypeCode, triggerEl: HTMLButtonElement) => {
+      playKawaiiSfx("cardFlip");
       lastTriggerRef.current = triggerEl;
       const rect = triggerEl.getBoundingClientRect();
       setSelectedCard({
@@ -71,6 +74,7 @@ export function TypesCatalog() {
   );
 
   const closeCardModal = useCallback(() => {
+    playKawaiiSfx("cardClose");
     setSelectedCard(null);
     window.setTimeout(() => {
       lastTriggerRef.current?.focus();
@@ -327,11 +331,16 @@ function FilterGroup({
         {options.map((opt) => {
           const active = value === opt.value;
           return (
-            <button
-              key={opt.value}
-              type="button"
-              onClick={() => onChange(opt.value)}
-              aria-pressed={active}
+              <button
+                key={opt.value}
+                type="button"
+                onClick={() => {
+                  if (opt.value !== value) {
+                    playKawaiiSfx("pop");
+                  }
+                  onChange(opt.value);
+                }}
+                aria-pressed={active}
               className={`relative inline-flex min-h-[48px] items-center justify-center rounded-full border-[3px] border-[#1B1B1F] px-3.5 py-2 text-sm sm:text-base font-extrabold whitespace-nowrap cursor-pointer sticker-press ${
                 active
                   ? "text-[#1B1B1F] shadow-[3px_3px_0_#1B1B1F]"

@@ -16,6 +16,7 @@ import {
   type Language,
   type TranslationDictionary,
 } from "@/lib/i18n";
+import { playKawaiiSfx } from "@/lib/kawaii-sfx";
 
 const STORAGE_KEY = "pooptype_lang";
 
@@ -142,7 +143,10 @@ export function LanguageSwitcher({
   return (
     <button
       type="button"
-      onClick={toggle}
+      onClick={() => {
+        playKawaiiSfx("pop");
+        toggle();
+      }}
       aria-label={t.switcherAria}
       data-testid={testId}
       data-lang={lang}

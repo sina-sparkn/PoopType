@@ -9,6 +9,7 @@ import {
   ScrollProgressBar,
   SPRING_SNAPPY,
 } from "@/components/motion/MotionPrimitives";
+import { playKawaiiSfx } from "@/lib/kawaii-sfx";
 
 export function SiteHeader() {
   const pathname = usePathname();
@@ -34,6 +35,7 @@ export function SiteHeader() {
         {/* Top bar brand logo (localized EN / FA sticker logo) */}
         <Link
           href="/"
+          onClick={() => playKawaiiSfx("pop")}
           aria-label={t.brandName}
           data-testid="site-header-logo"
           className="inline-flex items-center shrink-0 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#FF7AC6]/60 rounded-2xl"
@@ -82,6 +84,7 @@ export function SiteHeader() {
                 <Link
                   key={link.href}
                   href={link.href}
+                  onClick={() => playKawaiiSfx("pop")}
                   className="relative inline-flex min-h-[40px] items-center rounded-full px-3.5 lg:px-5 py-1.5 font-display text-base tracking-wide text-[#1B1B1F] whitespace-nowrap shrink-0 hover:bg-[#FFF6E5]/70 transition-colors"
                 >
                   {isActive && (
