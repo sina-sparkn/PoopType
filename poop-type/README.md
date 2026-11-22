@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="./public/assets/aistudio/Kawaii_PoopType_Sticker_Logo_e3f3f15e.png" alt="PoopType Kawaii Mascot Logo" width="260" />
+<img src="./public/assets/aistudio/PoopType_Kawaii_Mascot_Banner_cf57a0d3.png" alt="PoopType Kawaii Mascot Banner" width="900" />
 
 # 💩 PoopType
 
