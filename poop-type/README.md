@@ -1,88 +1,132 @@
-# PoopType
+<div align="center">
 
-> Peer-reviewed bathroom pseudoscience. Your poop never leaves your device.
+<img src="./public/assets/aistudio/Kawaii_PoopType_Sticker_Logo_e3f3f15e.png" alt="PoopType Kawaii Mascot Logo" width="260" />
 
-PoopType is a parody personality typing web app built with Next.js (App Router), TypeScript, Tailwind CSS, Framer Motion, and client-side HTML Canvas pixel analysis. Upload 1 to 5 photos in the browser to receive a deterministic 4-letter personality code (such as `PPTO` or `PPLO`), an estimated Bristol Stool Scale rating, humoral temperament, Freudian classification, joke Big Five meters, and a client-side shareable PNG card.
+# 💩 PoopType
 
-**For entertainment only. Not medical or psychological advice.**
+### *100% Peer-Unreviewed Bathroom Pseudoscience — Now With Cute Sound Effects.*
+
+> *"Myers-Briggs made you answer 93 exhausting questions about whether you prefer parties or books. PoopType just needs one brave trip to the bathroom and 3 seconds of client-side math."*
+
+[![Certified Pseudoscience](https://img.shields.io/badge/science-0%25%20real%20%7C%20100%25%20vibes-FF7AC6?style=for-the-badge&labelColor=1B1B1F)](#the-official-unscientific-disclaimer)
+[![Cloud Uploads](https://img.shields.io/badge/photos%20uploaded-0%20bytes%20ever-6BE3B5?style=for-the-badge&labelColor=1B1B1F)](#the-sacred-bathroom-privacy-pact)
+[![Bilingual](https://img.shields.io/badge/languages-English%20%2B%20%D9%81%D8%A7%D8%B1%D8%B3%DB%8C%20RTL-FFD93D?style=for-the-badge&labelColor=1B1B1F)](#screenshots--tour-of-the-throne-room)
+[![Next.js 16](https://img.shields.io/badge/built%20with-Next.js%2016%20%2B%20Canvas%20API-5CC8FF?style=for-the-badge&labelColor=1B1B1F)](#run-it-yourself-no-plumber-required)
+
+</div>
 
 ---
 
-## Setup & Scripts
+## 🤔 Wait... What Did You Just Build?
+
+**PoopType** is a kawaii sticker-book parody personality game that turns **1 to 5 photos** (processed **100% locally in your browser** — we genuinely do not want your photos on our servers, please keep them) into:
+
+- 🏷️ **A deterministic 4-letter PoopType code** (like `PPTO — The Treasure Keeper` or `PPLO — The Sunny Planner`)
+- 🧻 **An estimated Bristol Stool Scale score** (1 to 7, lovingly translated into kid-friendly shapes)
+- 📊 **Five completely made-up Big Five personality meters** + superpowers, silly quirks, best pal, and arch-rival
+- 🖼️ **A downloadable cartoon PNG trading card** (with photos **OFF** by default so you don't accidentally traumatize the family group chat)
+- 🎵 **Auto-playing background music**, a **5-bar candy soundwave visualizer**, **wiggling pastel polka dots** that dance along to the song, and **subtle kawaii Web Audio sound effects** (bubble pops, 3D card-flip sparkles, ascending reveal chimes, and a celebratory mini-fanfare!)
+- 🌐 **Full English (LTR) + Native Persian / فارسی (RTL)** support, complete with localized kawaii sticker logos
+
+> ⚠️ **The Official Unscientific Disclaimer:**
+> This app is **100% for laughs**. It is **not** medical advice, **not** psychological advice, and **not** a substitute for eating a vegetable once in a while. If a photo looks unusually red, black/tarry, or pale/clay-colored, the app pops up a friendly yellow **Vibe Alert** sticker reminding you to check with a real doctor — because real doctors actually went to school for this.
+
+---
+
+## 📸 Screenshots (Tour of the Throne Room)
+
+### 🏠 Home — Sticker-Book Chaos & Dancing Candy Visualizer
+Winking mascot, private photo dropbox, floating Play/Pause candy waveform visualizer, and pastel background dots that slowly wiggle up and down while the music plays.
+
+<p align="center">
+  <img src="./docs/screenshots/home-hero.png" alt="PoopType Home Page with kawaii mascot, sticker badges, and candy music visualizer" width="900" />
+</p>
+
+---
+
+### 🃏 All 16 Collectible PoopTypes (With 3D Flipping Cards!)
+Filter all 16 archetypes by Shape, Edges, Color, or Shine, and tap any trading card to flip it open in 3D with a tiny sparkle sound.
+
+<p align="center">
+  <img src="./docs/screenshots/types-catalog-modal.png" alt="All 16 PoopType collectible trading cards with PPTO The Treasure Keeper flipped open in 3D" width="900" />
+</p>
+
+---
+
+### 🎉 The Grand Result Reveal (Confetti, 4-Letter Tiles & Share Card)
+Drumroll → 4 ascending pentatonic tile flips → confetti blast → your official 4-letter trading card, ready to copy, share, or save as a PNG.
+
+<p align="center">
+  <img src="./docs/screenshots/result-card.png" alt="Revealed PPLO The Sunny Planner result card with confetti and four colored letter tiles" width="900" />
+</p>
+
+---
+
+### 🌐 Full Persian (RTL) Mode + 5-Year-Old-Friendly FAQ
+One tap flips the entire experience into native Persian (`فارسی`) with Vazirmatn typography, a custom Persian sticker logo (`پوپ‌تایپ`), mirrored floating controls, and a jargon-free FAQ explaining how the pixel "I Spy" algorithm works.
+
+<p align="center">
+  <img src="./docs/screenshots/persian-rtl-faq.png" alt="Persian RTL mode showing custom Persian kawaii logo, FAQ accordions with Lucide icons, Back-to-Top button, and music visualizer" width="900" />
+</p>
+
+---
+
+## 🔬 How Our "Algorithm" Actually Works (Explain Like I'm 5)
+
+No cloud AI. No sneaky servers. Just honest, deterministic **HTML Canvas pixel math + SHA-256** right on your screen:
+
+1. **Honey, I Shrunk the Photo**: Your browser redraws the image onto a tiny offscreen canvas (max `128px`) — which instantly **wipes all secret EXIF & GPS metadata** (so nobody knows which Taco Bell inspired your masterpiece).
+2. **A Quick Game of "I Spy" Across 4 Clues**:
+
+| Clue | Letter A | Letter B | How the Pixels Decide |
+| :--- | :--- | :--- | :--- |
+| **1. Shape** | **`P`** — Firm *(Packed)* | **`F`** — Soft *(Free-flowing)* | Connected-component blob count & elongation (maps to Bristol 1–7) |
+| **2. Edges** | **`P`** — Smooth *(Precise)* | **`R`** — Bumpy *(Ragged)* | 3×3 Sobel edge-detection density around the silhouette |
+| **3. Color** | **`T`** — Dark *(Toasted)* | **`L`** — Light *(Light)* | Center-weighted CIE `L*` lightness inside the earth-tone band |
+| **4. Shine** | **`O`** — Shiny *(Oily)* | **`D`** — Matte *(Dry)* | Ratio of bright specular highlight pixels |
+
+3. **Same Photo = Same Card (Forever)**: A local `SHA-256` hash seeds tie-breakers and the `"Confidence: XX.X% (made up)"` badge, so uploading the exact same photo twice always awards the exact same 4-letter destiny.
+4. **Poop Portfolio Mode (1–5 Photos)**: Uploading multiple photos averages your clues across your *body of work*. Truly visionary.
+
+---
+
+## 🔒 The Sacred Bathroom Privacy Pact
+
+We take bathroom privacy more seriously than anything else in this repo:
+
+- **0 bytes uploaded**: There are literally zero upload endpoints, zero databases, and zero third-party AI calls. Turn off your Wi-Fi and it still works!
+- **EXIF & GPS incinerated**: Every image is redrawn onto a fresh `<canvas>` immediately, stripping camera metadata before analysis or thumbnails.
+- **Image-free share links**: Shared URLs (`/result/PPLO?b=4&c=96.2&t=68...`) encode only your 4-letter code and summary numbers — never your photo.
+- **Safe-by-default PNG cards**: Exported share cards leave photos **OFF** unless you intentionally check the opt-in box.
+
+---
+
+## 🚀 Run It Yourself (No Plumber Required)
 
 ```bash
 cd poop-type
 npm install
 npm run dev       # Starts Next.js on http://localhost:3000
-npm run build     # Runs TypeScript check + production Next.js build
-npm run lint      # Runs ESLint + tsc --noEmit
-npm test          # Runs node:test unit tests for lib/analyze.ts
-```
-
-### Dependencies & Justifications
-
-Runtime dependencies are strictly limited to the core stack:
-- `next`, `react`, `react-dom` — Next.js App Router runtime.
-- `framer-motion` — Accessible UI transitions and meter animations (with `MotionConfig reducedMotion="user"`).
-- `tailwindcss` / `@tailwindcss/postcss` — Utility-first styling.
-- `tsx` (devDependency) — Runs Node's built-in `node:test` runner directly against TypeScript unit tests in `lib/analyze.test.ts`.
-
-No external AI APIs, no database, no auth, and no third-party analytics or image upload libraries are used.
-
----
-
-## Project Structure
-
-```text
-poop-type/
-├── app/
-│   ├── globals.css               # Tailwind v4 theme variables & reduced-motion rules
-│   ├── layout.tsx                # Root layout, Google Fonts, metadata, header & footer
-│   ├── page.tsx                  # Home page with masthead, UploadAnalyzer, and 4-axis guide
-│   ├── result/[code]/
-│   │   ├── page.tsx              # Dynamic result page reconstructed purely from URL params
-│   │   └── not-found.tsx         # Friendly 404 for unknown 4-letter codes
-│   ├── types/page.tsx            # Browse & filter all 16 PoopType classifications
-│   └── science/page.tsx          # "The Actual Science" grounded strictly in peer-reviewed refs
-├── components/
-│   ├── MotionProvider.tsx        # Framer Motion reduced-motion wrapper
-│   ├── SiteHeader.tsx            # Single-row 3-zone navigation header
-│   ├── SiteFooter.tsx            # Site-wide entertainment disclaimer & privacy summary
-│   ├── UploadAnalyzer.tsx        # Drag-and-drop / camera intake, previews, 3s loading sequence
-│   ├── ResultView.tsx            # Result report, Big Five meters, Vibe Alert, share card UI
-│   └── TypesCatalog.tsx          # Filterable 16-type grid
-└── lib/
-    ├── types-data.ts             # All 16 codes, axis definitions, fictional archetypes, Bristol copy
-    ├── analyze.ts                # Pure-TS Canvas pixel pipeline, SHA-256 seeding, URL codec
-    ├── analyze.test.ts           # Deterministic node:test unit suite
-    ├── share-card.ts             # Client-side HTML Canvas PNG card renderer
-    └── session-store.ts          # Ephemeral in-memory preview store (never persisted)
+npm run build     # Production Next.js build
+npm run lint      # ESLint + tsc --noEmit
+npx tsx --test lib/*.test.ts   # Runs all unit tests
 ```
 
 ---
 
-## Analysis Heuristics (`lib/analyze.ts`)
+## 🧰 Under the Hood (Actual Serious Tech Stack)
 
-All analysis executes locally in the browser using the HTML Canvas API and Web Crypto API:
-
-1. **Validation & Downscaling**: Accepts JPG, PNG, WebP, and HEIC (where browser-supported), up to 8 MB per file and 1–5 files per session ("Poop Portfolio"). Every image is re-drawn to an offscreen `<canvas>` scaled to at most `128px` on its longest side.
-2. **Foreground Segmentation**: Estimates backdrop color from the outer border ring and segments foreground pixels by Euclidean RGB distance (falling back to a central disk on uniform frames).
-3. **Tone (`T` Toasted vs `L` Light)**: Computes center-weighted mean CIE `L*` lightness for pixels inside the brown/yellow/green/red hue band. Below threshold → `T`; at or above → `L`.
-4. **Outline (`P` Precise vs `R` Ragged)**: Runs a 3×3 Sobel operator (`Gx`, `Gy`) on grayscale pixels across the foreground and its immediate perimeter. Low edge density → `P`; high edge density → `R`.
-5. **Sheen (`O` Oily vs `D` Dry)**: Measures the share of near-white or high-luminance low-saturation specular highlights inside the segmented foreground. High specular share → `O`; low → `D`.
-6. **Form (`P` Packed vs `F` Free-flowing & Bristol 1–7)**: Runs 4-connected BFS connected-component labeling and covariance-eigenvalue elongation on foreground blobs:
-   - Many compact blobs → Bristol 1–2 (`P`)
-   - Elongated cohesive blob → Bristol 3–4 (`P` for 3; Bristol 4 breaks ties via seeded SHA-256 hash)
-   - Wide, flat, or ragged mass → Bristol 5–7 (`F`)
-7. **Seeded Determinism**: Computes SHA-256 over the raw image bytes using `crypto.subtle.digest`. The digest seeds tie-breaks, tiny score jitter, Big Five variations, and the `"Confidence: XX.X% (made up)"` readout—so uploading the same image twice always produces the identical code and report.
-8. **Poop Portfolio Averaging**: When 2–5 images are uploaded, continuous metrics and Bristol estimates are averaged across specimens, and individual hashes are combined via SHA-256.
-9. **Vibe Alert**: If the foreground is predominantly strong red, very dark/black-tarry, or very pale/clay-colored, the result displays a non-diagnostic note advising users to consult a medical professional if persistent.
+- **Next.js 16 (App Router)** + **React 19** + **TypeScript**
+- **Tailwind CSS v4** — Custom kawaii candy palette, hard comic shadows, and GPU-composited wiggling dot & equalizer keyframes
+- **Framer Motion** — Snappy springs, 3D card-flip modals, staggered scroll reveals, and full `prefers-reduced-motion` support
+- **Lucide React** — Crisp outline icons for accordions, Back-to-Top, and media controls
+- **Web Audio API** (`lib/kawaii-sfx.ts`) — Zero-asset synthesized kawaii UI sound effects (soft sine/triangle waves through a 3.2 kHz low-pass filter)
+- **HTML Canvas API & Web Crypto API** (`lib/analyze.ts`, `lib/share-card.ts`) — 100% client-side pixel analysis, SHA-256 determinism, and PNG trading card generation
 
 ---
 
-## Privacy Design
+<div align="center">
 
-- **Zero Server Uploads**: No image bytes are ever sent over the network. There are no upload API routes, databases, or third-party AI calls.
-- **EXIF & GPS Stripping**: Every image is immediately redrawn to a fresh HTML `<canvas>` before analysis and before generating local preview thumbnails, stripping camera EXIF and GPS metadata.
-- **URL-Reconstructed Results**: Shared links (`/result/PPTO?b=2&c=94.7&t=...`) encode only the 4-letter code and summary parameters—never images—so shared links work in fresh tabs without transmitting photos.
-- **Photos Excluded from Share Cards by Default**: The client-side PNG share card excludes uploaded photos by default, behind an explicit opt-in checkbox that only reads ephemeral in-memory thumbnails from the active tab.
+*Made for laughs. Please wash your hands before opening a pull request.* 🧼✨
+
+</div>
