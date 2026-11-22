@@ -18,6 +18,10 @@ export const EN_DICT: TranslationDictionary = {
     mobileNavAria: "Bottom menu",
     backToTopLabel: "Top",
     backToTopAria: "Back to top",
+    musicPlayLabel: "Play",
+    musicPauseLabel: "Pause",
+    musicPlayAria: "Play background music",
+    musicPauseAria: "Pause background music",
   },
   footer: {
     disclaimer: "Just for fun! Not real doctor or brain advice.",

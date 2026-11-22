@@ -18,6 +18,10 @@ export const FA_DICT: TranslationDictionary = {
     mobileNavAria: "منوی پایین",
     backToTopLabel: "بالا",
     backToTopAria: "برگشت به بالا",
+    musicPlayLabel: "پخش",
+    musicPauseLabel: "توقف",
+    musicPlayAria: "پخش موزیک پس‌زمینه",
+    musicPauseAria: "توقف موزیک پس‌زمینه",
   },
   footer: {
     disclaimer: "فقط برای خنده و سرگرمیه! توصیه پزشکی یا روانشناسی نیست.",

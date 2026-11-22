@@ -71,6 +71,10 @@ export interface TranslationDictionary {
     mobileNavAria: string;
     backToTopLabel: string;
     backToTopAria: string;
+    musicPlayLabel: string;
+    musicPauseLabel: string;
+    musicPlayAria: string;
+    musicPauseAria: string;
   };
   footer: {
     disclaimer: string;
